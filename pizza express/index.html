@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Express - Cardápio</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para cálculo do valor total do carrinho -->
+    <script>
+		$(document).ready(function() {
+			// Add event listener to select element
+			$("#forma-entrega").change(function() {
+				atualizarValorTotal();
+			});
+		});
+
+		function atualizarValorTotal() {
+			var valorTotal = 0;
+			var valorEntrega = 0;
+			$(".item-carrinho").each(function() {
+				var preco = parseFloat($(this).find(".preco-item").text().replace(",", "."));
+				var quantidade = parseInt($(this).find(".quantidade-item").val());
+				valorTotal += (preco * quantidade);
+			});
+			var formaEntrega = $("#forma-entrega").val();
+			if (formaEntrega == "jardim") {
+				valorEntrega = 7.00;
+			} else if (formaEntrega == "entrega") {
+				valorEntrega = 5.00;
+			}
+			var valorTotalAtual = parseFloat($("#valor-total").text().replace(",", "."));
+			var valorTotalComEntrega = valorTotalAtual + valorEntrega;
+			$("#valor-entrega").text(valorEntrega.toFixed(2).replace(".", ","));
+			$("#valor-total").text(valorTotalComEntrega.toFixed(2).replace(".", ","));
+		}
+	
+    </script>
+</head>
+<body>
+
+    <div class="container my-5">
+
+        <h1 class="text-center mb-4">Pizza Express</h1>
+
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+			<img src="img/logo_pizzaexpres.png" alt="Pizza Express" width="20%" height="20%" >
+			
+			<a class="navbar-brand" href="index.html">Pizza Express</a>
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="#cardapio">Cardápio</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#carrinhoDeCompra">Carrinho</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+        <!-- Cardápio -->
+        <h2>Cardápio</h2>
+		<div class="row" id="cardapio">
+		</div>
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/calabresa.png" alt="Pizza Grande Calabresa">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Calabresa 8 Fatias</h4>
+                        <p class="card-text">Molho de tomate, Calabresa.</p>
+						<p class="card-text">R$ 34,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Grande Calabresa" data-preco="34.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>			
+			
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/carioquinha.png" alt="Pizza Grande Carioquinha">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Carioquinha 8 Fatias</h4>
+                        <p class="card-text">Molho de tomate, Calabresa.</p>
+						<p class="card-text">R$ 29,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Grande Carioquinha" data-preco="29.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>
+			
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/frangocomcatupiry.png" alt="Pizza Frango com Catupiry">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Frango com Catupiry</h4>
+                        <p class="card-text">Molho de tomate, muçarela, frango desfiado e catupiry.</p>
+						<p class="card-text">R$ 44,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Frango com Catupiry" data-preco="44.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/presunto.png" alt="Pizza Grande Presunto">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Presunto</h4>
+                        <p class="card-text">Molho de tomate, muçarela e presunto.</p>
+						<p class="card-text">R$ 34,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Grande Presunto" data-preco="34.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>
+			
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/mussarela.png" alt="Pizza Grande Mussarela">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Mussarela</h4>
+                        <p class="card-text">Molho de tomate e muçarela </p>
+						<p class="card-text">R$ 34,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Grande Mussarela" data-preco="34.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>		
+			
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/brunet.png" alt="Pizza Grande Brunet">
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Grande Brunet</h4>
+                        <p class="card-text">Molho de tomate, palmito e muçarela </p>
+						<p class="card-text">R$ 44,99</p>
+						<button class="btn btn-danger btn-adicionar" data-nome="Pizza Grande Brunet" data-preco="44.99">Adicionar ao carrinho</button>
+					</div>
+				</div>
+			</div>	
+			
+		</div>
+	<div id="carrinhoDeCompra" >	
+	</id>
+		<!-- Carrinho de compras -->
+		<h2>Carrinho de compras</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Produto</th>
+					<th scope="col">Preço unitário</th>
+					<th scope="col">Quantidade</th>
+					<th scope="col">Preço total</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody id="itens-carrinho">
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="0" class="text-right">Valor entrega:</td>
+					<td>R$ <span id="valor-entrega">0,00</span></td>
+					
+					<td colspan="2" class="text-right">Valor total:</td>
+					<td>R$ <span id="valor-total">0,00</span></td>
+
+				</tr>
+				
+			</tfoot>
+		</table>
+	
+    <!-- Formulário de entrega/retirada -->
+    <h2>Formulário de entrega/retirada</h2>
+    <form>
+	
+		<div id="itens"></div>
+        
+		<div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" class="form-control" id="telefone" name="telefone" required>
+        </div>
+		
+        <div class="form-group">
+            <label for="endereco">Rua:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+        </div>
+
+        <div class="form-group">
+            <label for="numero">Número:</label>
+            <input type="number" class="form-control" id="numero" name="numero" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" class="form-control" id="bairro" name="bairro" required>
+        </div>
+        
+		<div class="form-group">
+            <label for="forma-entrega">Entrega/Retirar na Pizzaria:</label>
+            <select class="form-control" id="forma-entrega" name="forma-entrega" required>
+                <option value="">Selecione uma opção</option>
+                <option value="retirada">Retirada na Pizzaria</option>
+                <option value="jardim">Entrega - Jardim Oriente ou Sao Sebastião - R$ 7,00</option>
+				<option value="entrega">Entrega - Outros Bairros - R$ 5,00</option>
+            </select>
+        </div>
+        
+		<div class="form-group">
+            <label for="forma-pagamento">Forma de pagamento:</label>
+            <select class="form-control" id="forma-pagamento" name="forma-pagamento" required>
+                <option value="">Selecione uma opção</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão de crédito/débito</option>
+            </select>
+        </div>		
+		
+		<div class="form-group" id="div-troco" style="display: none;">
+            <label for="troco">Troco para quanto?</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+				<span class="input-group-text">R$</span>
+			</div>
+			<input type="number" class="form-control" id="troco" name="troco" step="0.01" min="0">
+		</div>
+	</div>
+	
+	<button type="submit" class="btn btn-success">Finalizar pedido</button>
+	
+	</form>
+	</div>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.3/dist/umd/popper-core.min.js"
+    integrity="sha384-v8XNtYUNJNFFNfmy48wxDRzN7g/yl0FJwIjjQH/5En/hyXsKszzsLy7H2nWbTN1d"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-U1xV4h4oIU8Ndd9HsAk/eNjhQ7/XsGXCcHwdZl/0npvmEXFg0NVPpTqY9V87dO/g"
+    crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+
+
+        // Adicionar item ao carrinho
+        $(".btn-adicionar").click(function () {
+            var nome = $(this).data("nome");
+            var preco = parseFloat($(this).data("preco"));
+            var id = "item-" + nome.toLowerCase().replace(/[^a-z0-9]/g, "-");
+            var quantidade = $("#" + id).find(".quantidade").text();
+            quantidade = parseInt(quantidade) + 1 || 1;
+
+            var linha = "<tr id='" + id + "'>" +
+                "<td>" + nome + "</td>" +
+                "<td>R$ " + preco.toFixed(2) + "</td>" +
+                "<td class='quantidade'>" + quantidade + "</td>" +
+                "<td class='preco-total'>R$ " + (preco * quantidade).toFixed(2) + "</td>" +
+                "<td><button class='btn btn-danger btn-remover' data-id='" + id + "'>Remover</button></td>" +
+                "</tr>";
+            if ($("#" + id).length) {
+                $("#" + id).replaceWith(linha);
+            } else {
+                $("#itens-carrinho").append(linha);
+            }
+
+            atualizarTotal();
+        });
+
+        // Remover item do carrinho
+        $(document).on("click", ".btn-remover", function () {
+            var id = $(this).data("id");
+            $("#" + id).remove();
+            atualizarTotal();
+        });
+
+        // Atualizar preço total
+        function atualizarTotal() {
+            var total = 0;
+            $(".preco-total").each(function () {
+                total += parseFloat($(this).text().replace("R$ ", ""));
+            });
+            $("#valor-total").text(total.toFixed(2));
+        }
+
+        // Mostrar/ocultar campo de troco
+        $("#forma-pagamento").change(function () {
+            if ($(this).val() == "dinheiro") {
+                $("#div-troco").show();
+            } else {
+                $("#div-troco").hide();
+            }
+        });
+
+        // Enviar mensagem via WhatsApp
+        $("form").submit(function (event) {
+            event.preventDefault();
+            var pedido = "";
+            var valorTotal = $("#valor-total").text();
+            
+			//Cabeçalho
+            pedido += "           🍕 *Pedido de Pizza Express* 🍕           \n\n";
+			
+			//Destalhes da Entrega
+			pedido += "---  🛵 *DETALHES DA ENTREGA* 🛵  --- \n";
+            
+	
+			var formaEntrega = $("#forma-entrega").val();
+			if (formaEntrega == "entrega") {
+                
+				pedido += "Entrega com taxa de R$ 5,00\n";
+                var nomeCliente = $("#nome").val();
+                var endereco = $("#endereco").val();
+                var numero = $("#numero").val();
+				var bairro = $("#bairro").val();
+				var numeroTel = $("#telefone").val();
+				
+				
+                pedido += "Cliente: " + nomeCliente + "\n";
+				pedido += "Rua: " + endereco + "\n";
+				pedido += "Numero: " + numero + "\n";
+				pedido += "Bairro: " + bairro + "\n";
+				
+                pedido += "Telefone: " + numeroTel + "\n";
+				pedido += "\n";
+			}if (formaEntrega == "jardim") {
+                
+				pedido += "Entrega com taxa de R$ 7,00\n";
+                var nomeCliente = $("#nome").val();
+                var endereco = $("#endereco").val();
+                var numero = $("#numero").val();
+				var bairro = $("#bairro").val();
+				var numeroTel = $("#telefone").val();
+								
+                pedido += "Cliente: " + nomeCliente + "\n";
+				pedido += "Rua: " + endereco + "\n";
+				pedido += "Numero: " + numero + "\n";
+				pedido += "Bairro: " + bairro + "\n";
+				
+                pedido += "Telefone: " + numeroTel + "\n";
+				pedido += "\n ";	
+            }else{
+                var nomeCliente = $("#nome").val();
+                var endereco = $("#endereco").val();
+                var numero = $("#numero").val();
+				var bairro = $("#bairro").val();
+				var telefone = $("#telefone").val();
+				pedido += "Cliente: " + nomeCliente + "\n";
+                pedido += "Retirada na Pizzaria\n";	
+				pedido += "\n ";				
+			}
+			            
+			pedido += "\n  💵 *PRODUTOS* 💵  \n";
+			$("#itens-carrinho tr").each(function () {
+                var nome = $(this).find("td:first").text();
+                var quantidade = $(this).find(".quantidade").text();
+                var precoTotal = $(this).find(".preco-total").text();
+                pedido += nome + " (" + quantidade + ") - " + precoTotal + "\n";
+            });
+            
+            pedido += "\n 💵 *VALOR DO PEDIDO*  💵   ";
+            
+			pedido += "Valor total: R$ " + valorTotal + "\n";
+			
+            var formaPagamento = $("#forma-pagamento").val();
+            
+            pedido += "\n  🥰 *DADOS DO PEDIDO* 🥰   \n";
+            
+			pedido += "Forma de pagamento: " + formaPagamento + "\n";
+            
+			if (formaPagamento == "dinheiro") {
+                var troco = $("#troco").val();
+                pedido += "Troco para: R$ " + troco + "\n";
+            }
+			
+	        var mensagem = encodeURIComponent(pedido);
+            var url = "https://api.whatsapp.com/send?phone=5534998964543&text=" + mensagem;
+            window.open(url);
+        });
+    });
+</script>
+</body>
+</html>		
